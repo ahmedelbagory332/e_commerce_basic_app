@@ -16,6 +16,15 @@ class ProductsModel {
         this.image,
         this.rating});
 
+  ProductsModel.toCart(
+      {
+        this.id,
+        this.title,
+        this.description,
+        this.category,
+        this.image
+      });
+
   ProductsModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];

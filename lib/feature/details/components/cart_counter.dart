@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:e_commerce_basic_app/core/constants.dart';
 
 class CartCounter extends StatefulWidget {
-  const CartCounter({super.key});
+  const CartCounter({super.key, required this.increase, required this.decrease});
 
+  final Function(int num) increase;
+  final Function(int num) decrease;
 
   @override
   _CartCounterState createState() => _CartCounterState();
@@ -23,6 +25,7 @@ class _CartCounterState extends State<CartCounter> {
                 setState(() {
                   numOfItems++;
                 });
+                widget.increase(numOfItems);
               }),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin / 2),
@@ -40,6 +43,7 @@ class _CartCounterState extends State<CartCounter> {
                 setState(() {
                   numOfItems--;
                 });
+                widget.decrease(numOfItems);
               }
             },
           ),

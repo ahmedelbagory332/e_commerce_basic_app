@@ -28,7 +28,38 @@ class HomeBody extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const Categories(),
-
+        StreamBuilder(
+            stream: FirebaseFirestore.instance
+                .collection("slider")
+                .where('showAd', isEqualTo: true)
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              if (snapshot.hasError) {
+                return const SizedBox();
+              }
+              if (!snapshot.hasData) {
+                return const SizedBox();
+              }
+              return SizedBox(
+                  height: 100,
+                  child: CarouselSlider(
+                    options: CarouselOptions(
+                        height: 400.0, autoPlay: true),
+                    items: snapshot.data!.docs.map((doc) {
+                      return Builder(builder: (BuildContext context) {
+                        return doc["showAd"] == true? BannerImage(imageUrl: doc["url"]):const SizedBox();
+                      },
+                      );
+                    }).toList(),
+                  ));
+            }
+        ),
+        const SizedBox(
+          height: 20,
+        ),
         BlocConsumer<HomeCubit, HomeState>(
             listener: (context, state) {},
             builder: (context, state) {
@@ -50,35 +81,6 @@ class HomeBody extends StatelessWidget {
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
-                              StreamBuilder(
-                                  stream: FirebaseFirestore.instance
-                                      .collection("slider")
-                                      .where('showAd', isEqualTo: true)
-                                      .snapshots(),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.connectionState == ConnectionState.waiting) {
-                                      return const Center(child: CircularProgressIndicator());
-                                    }
-                                    if (snapshot.hasError) {
-                                      return const SizedBox();
-                                    }
-                                    if (!snapshot.hasData) {
-                                      return const SizedBox();
-                                    }
-                                    return SizedBox(
-                                        height: 200,
-                                        child: CarouselSlider(
-                                          options: CarouselOptions(
-                                              height: 400.0, autoPlay: true),
-                                          items: snapshot.data!.docs.map((doc) {
-                                            return Builder(builder: (BuildContext context) {
-                                              return doc["showAd"] == true? BannerImage(imageUrl: doc["url"]):const SizedBox();
-                                            },
-                                            );
-                                          }).toList(),
-                                        ));
-                                  }
-                              ),
                               context.watch<HomeCubit>().state.productsStatus ==
                                   ProductsStatus.success
                                   ?

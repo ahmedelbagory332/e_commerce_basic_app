@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_basic_app/core/notifications.dart';
 import 'package:e_commerce_basic_app/core/service_locator.dart';
 import 'package:e_commerce_basic_app/feature/add_wallet/manager/add_wallet_cubit.dart';
+import 'package:e_commerce_basic_app/feature/cart/manager/cart_cubit.dart';
 import 'package:e_commerce_basic_app/feature/favorites/data/repo/favorites_repo_impl.dart';
 import 'package:e_commerce_basic_app/feature/favorites/manager/favorites_cubit.dart';
 import 'package:e_commerce_basic_app/feature/home/data/repo/home_repo_impl.dart';
@@ -68,6 +69,9 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => AddNewWalletCubit(),
+        ),
+        BlocProvider(
+          create: (context) => CartCubit(),
         ),
       ],
       child: OKToast(

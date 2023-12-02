@@ -55,7 +55,7 @@ class WidgetError extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        "اعادة تحميل",
+                        "Refresh",
                         textAlign: TextAlign.center,
                         style: TextStyle(color: kMainDarkColor),
                       ),
