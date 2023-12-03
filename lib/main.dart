@@ -1,3 +1,7 @@
+import 'dart:async';
+import 'dart:io';
+import 'dart:ui';
+import 'package:timezone/data/latest.dart' as tz;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_basic_app/core/notifications.dart';
 import 'package:e_commerce_basic_app/core/service_locator.dart';
@@ -17,6 +21,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Permission.notification.isDenied.then((value) {
@@ -24,6 +30,7 @@ Future<void> main() async {
       Permission.notification.request();
     }
   });
+   tz.initializeTimeZones();
   await setupServiceLocator();
    await notificationInitialization();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -33,6 +40,7 @@ Future<void> main() async {
   firebaseMessagingListener();
   runApp(const MyApp());
 }
+
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});

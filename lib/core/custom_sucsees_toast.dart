@@ -45,15 +45,6 @@ class CustomSuccessToastWidget extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    SvgPicture.asset(
-                      "assets/images/done-md-light.svg",
-                      width: 18,
-                      height: 18,
-                      color: Colors.white,
-                    ),
-                    const SizedBox(
-                      width: 4,
-                    ),
                     SizedBox(
                       width: 300,
                       child: DefaultTextStyle(

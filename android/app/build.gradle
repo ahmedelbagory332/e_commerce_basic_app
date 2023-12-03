@@ -29,7 +29,7 @@ apply plugin: 'com.google.gms.google-services'
 
 android {
     namespace "com.example.e_commerce.e_commerce_basic_app"
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion 34
     ndkVersion flutter.ndkVersion
 
     compileOptions {

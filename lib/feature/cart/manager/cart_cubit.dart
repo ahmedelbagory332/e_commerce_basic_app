@@ -23,6 +23,20 @@ class CartCubit extends Cubit<CartState> {
       emit(state.copyWith(failure: ServerFailure(e.toString()), status: CartStatus.error));
     }
   }
+  void emptyCart() async {
+    await _cashCart.emptyCart();
+  }
+  Future<double> getCartTotal() async {
+    try{
+      var cartItems = await _cashCart.getProducts();
+      double totalCost = cartItems!.fold(0, (previousValue, cartItem) {
+        return previousValue + (int.parse(cartItem.price??"") * int.parse(cartItem.quantity??""));
+      });
+    return totalCost;
+    }catch(e){
+      return 0;
+    }
+  }
 
   void addQuantity(CartModel cart) {
     cart.quantity = (int.parse(cart.quantity!) + 1).toString();

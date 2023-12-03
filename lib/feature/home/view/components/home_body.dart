@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_commerce_basic_app/core/custom_error_toast.dart';
-import 'package:e_commerce_basic_app/core/custom_loading_dialog.dart';
 import 'package:e_commerce_basic_app/core/error_widget.dart';
 import 'package:e_commerce_basic_app/core/loading_widget.dart';
 import 'package:e_commerce_basic_app/feature/details/details_screen.dart';
@@ -27,7 +25,9 @@ class HomeBody extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Categories(),
+        const SizedBox(
+          height: 20,
+        ),
         StreamBuilder(
             stream: FirebaseFirestore.instance
                 .collection("slider")
@@ -44,7 +44,7 @@ class HomeBody extends StatelessWidget {
                 return const SizedBox();
               }
               return SizedBox(
-                  height: 100,
+                  height: 200,
                   child: CarouselSlider(
                     options: CarouselOptions(
                         height: 400.0, autoPlay: true),
@@ -81,6 +81,7 @@ class HomeBody extends StatelessWidget {
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
+                              const Categories(),
                               context.watch<HomeCubit>().state.productsStatus ==
                                   ProductsStatus.success
                                   ?

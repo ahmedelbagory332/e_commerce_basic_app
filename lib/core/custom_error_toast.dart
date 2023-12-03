@@ -42,15 +42,6 @@ class CustomErrorToastWidget extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    SvgPicture.asset(
-                      "assets/images/warning-md-dark.svg",
-                      width: 18,
-                      height: 18,
-                      color: Colors.white,
-                    ),
-                    const SizedBox(
-                      width: 4,
-                    ),
                     SizedBox(
                       width: 300,
                       child: DefaultTextStyle(

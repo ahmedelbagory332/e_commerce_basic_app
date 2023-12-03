@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 final CacheNotification _cacheNotification = CacheNotification();
 
@@ -30,6 +31,33 @@ Future<void> notificationInitialization() async {
 }
 
 onSelectNotification(NotificationResponse notificationResponse) async {}
+
+
+Future<void> scheduleNotification() async {
+
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  FlutterLocalNotificationsPlugin();
+
+  var androidDetails = const AndroidNotificationDetails(
+    'channelId',
+    'Channel Name',
+    importance: Importance.high,
+  );
+  var platformChannelSpecifics =
+  NotificationDetails(android: androidDetails);
+
+  var scheduledTime = tz.TZDateTime.now(tz.local).add(const Duration(seconds: 120));
+  await flutterLocalNotificationsPlugin.zonedSchedule(
+    0,
+    'Complete Your Purchase',
+    'You have items in your cart. Complete your purchase!',
+    scheduledTime,
+    platformChannelSpecifics,
+    androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+    uiLocalNotificationDateInterpretation:
+    UILocalNotificationDateInterpretation.absoluteTime,
+  );
+}
 
 Future<void> messageNotification(title, body) async {
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
