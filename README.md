@@ -1,16 +1,27 @@
 # e_commerce_basic_app
+simple app to view products and categories.
 
-A new Flutter project.
+## In this app we use
 
-## Getting Started
+ - FireBase Services(firestore - FCM - cloud messageing )
+ - Dio for api call
+ - Bloc for state management
+ - SQlite and secure local storage for caching
+ - getIt for dependency injection
+ - MVVM Code
+ 
+ ## App Fucntions
 
-This project is a starting point for a Flutter application.
+- getting category and products for each category
+- getting favorites products
+- adding product to cart
+- local notifications for remind cart list
+- remote notifications from firebase
+- notificcation list
+- user can add wallet for checkOut
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### App Video
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+https://github.com/ahmedelbagory332/e_commerce_basic_app/assets/47868151/dcb64421-b091-49a4-a545-cc1a420b5517
+
